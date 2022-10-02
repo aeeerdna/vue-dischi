@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container">
-      <AlbumContainerComponent />
+      <AlbumContainerComponent :albums="albums" />
     </div>
   </main>
 </template>
@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       apiUrl: "https://flynn.boolean.careers/exercises/api/array/music",
+      albums: [],
     };
   },
   created() {
@@ -28,7 +29,8 @@ export default {
         .get(this.apiUrl)
         .then((response) => {
           if (this.isResponseOK(response)) {
-            console.log("OK!!");
+            console.log(response.data);
+            this.albums = response.data.response;
           }
         })
         .catch((e) => {
@@ -46,6 +48,5 @@ export default {
 @import "../assets/styles/colors.scss";
 main {
   background-color: $bg-main;
-  color: white;
 }
 </style>
